@@ -1,4 +1,4 @@
-uikj
+
 # Medical Appointment No-Show Dataset Analysis
 
 | Contents                           |
