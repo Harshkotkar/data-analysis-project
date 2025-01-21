@@ -1,88 +1,101 @@
-# **Medical Appointment No Show Dataset Analysis**
+thj
+# Medical Appointment No-Show Dataset Analysis
 
-| Contents 											 	   	|
-| -------- 											 	   	|
-| [Dataset Description](#Dataset-Description)			   	|
-| [Columns Descreption](#Columns-Descreption) 		   		|
-| [EDA Questions](#eda-questions)							|
-| [Data Wrangling](#Data-Wrangling)					   		|
-| [Data Cleaning](#Data-Cleaning)						   	|
-| [Data Visualization](#Data-Visualization)					|
-| [Conclusion](#Conclusion)									|
-| [Built with](#Built-with)							   		|
+| Contents                           |
+|------------------------------------|
+| [Dataset Description](#dataset-description) |
+| [Columns Description](#columns-description) |
+| [EDA Questions](#eda-questions)   |
+| [Data Wrangling](#data-wrangling) |
+| [Data Cleaning](#data-cleaning)   |
+| [Data Visualization](#data-visualization) |
+| [Conclusion](#conclusion)         |
+| [Built With](#built-with)         |
 
-## Dataset Description: 
-A person makes a doctor appointment, receives all the instructions and no-show. Who to blame?
-This dataset collects information from 100k medical appointments in Brazil and is focused on the question of whether or not patients show up for their appointment. A number of characteristics about the patient are included in each row.
+---
 
-## Columns Descreption:
-1. `PatientId`: Identification of a patient.
-2. `AppointmentID`: Identification of each appointment.
-3. `Gender`: Male or Female.
-4. `AppointmentDay`: The day of the actuall appointment, when they have to visit the doctor.
-5. `ScheduledDay`: The day someone called or registered the appointment, this is before appointment of course.
-6. `Age`: How old is the patient.
-7. `Neighbourhood`: Where the appointment takes place.
-8. `Scholarship`: True of False. Observation, this is a broad topic, consider reading this article https://en.wikipedia.org/wiki/Bolsa_Fam%C3%ADlia
-9. `Hipertension`: True or False.
-10. `Diabetes`: True or False.
-11. `Alcoholism`: True or False.
-12. `Handcap`: True or False.
-13. `SMS_received`: 1 or more messages sent to the patient.
-14. `No-show`: True or False.
+## Dataset Description
+This dataset contains information from 100,000 medical appointments in Brazil and explores the factors influencing whether patients show up for their appointments. Each row includes details about the appointment and patient characteristics.  
 
-## EDA Questions:
-- Q1: How often do men go to hospitals compared to women? Which of them is more likely to show up?
-- Q2: Does recieving an SMS as a reminder affect whether or not a patient may show up? is it correlated with number of days before the appointment?
-- Q3: Does having a scholarship affects showing up on a hospital appointment? What are the age groups affected by this?
-- Q4: Does having certain deseases affect whather or not a patient may show up to their appointment? is it affected by gender?
+---
 
-## Data Wrangling:
-Our data can be found on `noshowappointments-kagglev2-may-2016.csv` file provided on this repository, downloaded from [Kaggle](https://www.kaggle.com/datasets/joniarroba/noshowappointments). 
+## Columns Description
+1. **`PatientId`**: Unique identifier for patients.  
+2. **`AppointmentID`**: Unique identifier for appointments.  
+3. **`Gender`**: Patient's gender (Male/Female).  
+4. **`ScheduledDay`**: Date the appointment was scheduled.  
+5. **`AppointmentDay`**: Date of the actual appointment.  
+6. **`Age`**: Patient's age.  
+7. **`Neighbourhood`**: Location of the appointment.  
+8. **`Scholarship`**: Indicates if the patient is enrolled in a welfare program ([Bolsa Família](https://en.wikipedia.org/wiki/Bolsa_Fam%C3%ADlia)).  
+9. **`Hipertension`**: Indicates if the patient has hypertension.  
+10. **`Diabetes`**: Indicates if the patient has diabetes.  
+11. **`Alcoholism`**: Indicates if the patient has alcoholism.  
+12. **`Handcap`**: Indicates if the patient has a disability.  
+13. **`SMS_received`**: Number of reminder SMS received by the patient.  
+14. **`No-show`**: Whether the patient missed the appointment.  
 
-## Data Cleaning:
-### Exploration Summery
-1. our dataset consists of 110527 rows with 14 columns, and has no NaNs nor duplicated values.
-2. `PatientId` and `AppointmentId` columns wouldn't be helpful during analysis.
-3. `ScheduledDay` and `AppointmentDay` needs to be casted to date data type.
-4. we may append a new column for days until appointment.
-5. `Gender` needs to be casted into a categoy type
-6. `Scholarship`, `Hipertension`, `Diabetes`, `Alcoholism` and `SMS_recieved` better be boolean data type.
-7. `No-show` column needs to be parsed and asted to boolean type.
-8. `Handcap` colume needs to be cleaned to have only `0` and `1` values.
-9. `Age` columns has inconsistant unique values that needs to be handled.
+---
 
-We endded up with a datafram of 110521 rows and 11 columns after completing the cleaning process. 
+## EDA Questions
+1. How often do men visit hospitals compared to women? Who is more likely to show up?  
+2. Does receiving an SMS reminder impact attendance? Is there a link between reminders and days before the appointment?  
+3. Does having a scholarship affect appointment attendance? Are specific age groups influenced?  
+4. Do certain diseases affect attendance? Is this influenced by gender?  
+
+---
+
+## Data Wrangling
+The dataset is sourced from the file `noshowappointments-kagglev2-may-2016.csv` ([Kaggle](https://www.kaggle.com/datasets/joniarroba/noshowappointments)).  
+
+---
+
+## Data Cleaning
+### Key Steps
+1. Initial dataset contained 110,527 rows and 14 columns, with no missing or duplicate values.  
+2. Removed less relevant columns: `PatientId` and `AppointmentId`.  
+3. Converted `ScheduledDay` and `AppointmentDay` to datetime format and calculated days until the appointment.  
+4. Cleaned `Handcap` column to only include `0` and `1`.  
+5. Converted `Gender` to categorical type.  
+6. Changed columns like `Scholarship`, `Hipertension`, `Diabetes`, `Alcoholism`, and `SMS_received` to boolean types.  
+7. Parsed `No-show` column into a boolean format.  
+8. Addressed inconsistencies in `Age` column.  
+
+**Final Cleaned Dataset**: 110,521 rows and 11 columns.  
+
+---
 
 ## Data Visualization
-Using `Matplotlib` and `Seaborn`, we made several meaningful visuals and charts to help us gain informative insights regarding any correlation between attributes in our dataset, that'll be discussed in the next section.
+Visualizations were created using `Matplotlib` and `Seaborn` to uncover patterns and correlations.  
+
+---
 
 ## Conclusion
-These are derived conclusions after completing our data visualisation phase.
+### Q1: Gender Analysis  
+- Women constitute a larger proportion of the dataset and show higher appointment attendance compared to men.  
+- Overall, 79.8% of patients attended their appointments, while 20.1% missed them.  
 
-### Q1: How often do men go to hospitals compared to women? Which of them is more likely to show up?
-- Nearly half of our dataset conists of women with wider age destribution and some outliers, all of which achiees a rate higher than men.
-- It is obvious that 79.8% of our patients did show up on their appointments and only 20.1% of them did not.
-- Women do show up on their appointments more often than men do, but this may b affected by the percentage of women on this dataset.
-___
-### Q2: Does recieving an SMS as a reminder affect whether or not a patient may show up? is it correlated with number of days before the appointment?
-- 67.8% of our patients did not reciee any SMS reminder of their appointments, yet they showed up on their appointments.
-- It is clear that there is a positive correlation between number of due days and whether a patient shows up or not.
-- Patient with appointments from 0 to 30 days tend to show up more regularly, while patients with higher number of days tend to not show up.
-- gender does not affect number of due days and showing up at an appointment that much.
-___
-### Q3: Does having a scholarship affects showing up on a hospital appointment? What are the age groups affected by this?
-- Having a scholarship does not affect showing up to a doctor appointment that much.
-- Huge age group is enrolled to that scholarship and also enrol their babies on.
-___
-### Q4: Does having certain deseases affect whather or not a patient may show up to their appointment? is it affected by gender?
-- We can conclude that the vast majority of our dataset does not have chronic deseases, yet, they are existed in so many young people.
-- Having a chronic deseas may affect your showing up at a hospital's appointment.
+### Q2: SMS Reminders  
+- 67.8% of patients who didn’t receive SMS reminders still attended their appointments.  
+- Attendance decreases as the number of days between scheduling and the appointment increases.  
+- Gender does not significantly impact attendance related to SMS reminders.  
 
-## Built with:		
-- JupyterLab	
-- Python3	   	
-- Pandas		
-- Numpy			
-- Matplotlib	
-- Seaborn		
+### Q3: Scholarships and Age Groups  
+- Having a scholarship has little impact on attendance rates.  
+- The scholarship program spans multiple age groups, including infants enrolled by their parents.  
+
+### Q4: Chronic Diseases and Attendance  
+- Most patients in the dataset do not have chronic diseases.  
+- Chronic illnesses are more common among younger patients and can negatively impact attendance.  
+
+---
+
+## Built With
+- **JupyterLab**  
+- **Python 3**  
+- **Pandas**  
+- **NumPy**  
+- **Matplotlib**  
+- **Seaborn**
+
+---
